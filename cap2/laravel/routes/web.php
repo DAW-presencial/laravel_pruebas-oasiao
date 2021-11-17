@@ -18,4 +18,4 @@ use App\Http\Controllers\agendaController;
 //[nombreClase :: class, 'funcion'] o __invoke sin corchetes
 Route::get('/{visitas?}', [contadorController::class,'contador']); //controller --> contador
 
-Route:get('/agenda',[agendaController::class,'agenda']);
+Route::get('/agenda',[agendaController::class,'agenda']);
