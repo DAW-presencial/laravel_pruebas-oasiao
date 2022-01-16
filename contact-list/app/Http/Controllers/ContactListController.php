@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\ContactList;
 use Illuminate\Http\Request;
+use function Symfony\Component\String\u;
 
 class ContactListController extends Controller
 {
@@ -14,11 +15,12 @@ class ContactListController extends Controller
 
         //dd($contactList);//me muestra la vista index.blade.php y le paso por parametro $contactList
 
-        return view('contactlist.index',['contactlist'=> $contactList]);
+        return view('contactlist.index', ['contactlist' => $contactList]);
     }
 
     public function create()
     {
+        //WE NEED THE FOREIGN KEY TO GO BACK TO OUR CONTACTS
         return view('contactlist.create');
     }
 
@@ -30,43 +32,69 @@ class ContactListController extends Controller
         $contact->save();*/
 
         $contact = ContactList::create([ //you can do put make but you have to use save();
-           'name' => $request->input('name'), //field => $request->input('name of the input')
-            'phone'=> $request->input('phone')
+            'name' => $request->input('name'), //field => $request->input('name of the input')
+            'phone' => $request->input('phone'),
+            'usuario_id' => $request->input('usuario_id')
         ]);
-        return redirect('/contacts');
+
+        $usr_id = $contact->usuario_id;
+        //dd($contact->usuario_id);
+        return redirect('/usuarios/'.$usr_id);
 
     }
 
     public function show($id)
     {
         $contact = ContactList::find($id);
-        return view('contactlist.show')->with('contact',$contact);
+        return view('contactlist.show')->with('contact', $contact);
         //'contact' --> lo q pasamos al blade || $contact --> variable anterior
     }
 
     public function edit($id)
     {
-        $contact = ContactList::where('id',$id)->first();
-        return view('contactlist.edit')->with('contact',$contact); //->with ::: we don't pass all the array, only one parameter
+        $contact = ContactList::where('id', $id)->first();
+        return view('contactlist.edit')->with('contact', $contact); //->with ::: we don't pass all the array, only one parameter
     }
 
     public function update(Request $request, $id)
     {
-        $contact = ContactList::where('id',$id)
+        $contact = ContactList::where('id', $id)
             ->update([
-            'name' => $request->input('name'), //field => $request->input('name of the input')
-            'phone'=> $request->input('phone')
-        ]);
+                'name' => $request->input('name'), //field => $request->input('name of the input')
+                'phone' => $request->input('phone')
+            ]);
 
-        return redirect('/contacts');
+
+        //WE NEED THE FOREIGN KEY TO GO BACK TO OUR CONTACTS
+        $usr = ContactList::where('id',$id)->get()->toArray();
+
+        $usr_id = 0;
+
+        foreach ($usr as $user)
+        {
+           $usr_id = $user['usuario_id'];
+        }
+
+        return redirect('/usuarios/'.$usr_id);
     }
 
     public function destroy($id)
     {
-        $contact = ContactList::where('id',$id)->first();
+        //WE NEED THE FOREIGN KEY TO GO BACK TO OUR CONTACTS
+        $usr = ContactList::where('id',$id)->get()->toArray();
+
+        $usr_id = 0;
+
+        $contact = ContactList::where('id', $id)->first();
 
         $contact->delete();
 
-        return redirect('/contacts');
+        foreach ($usr as $user)
+        {
+            $usr_id = $user['usuario_id'];
+        }
+
+        return redirect('/usuarios/'.$usr_id);
+
     }
 }

@@ -15,20 +15,23 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('usuario')->insert([
-            'username'=> 'onikakimasiao'
-        ]);
+        $usernames = [
+            ['username'=>'onikakimasiao'],
+            ['username'=>'santimb']
+        ];
+
+        DB::table('usuario')->insert($usernames);
 
         $contacts = [
             [
                 'name' => 'Santi',
                 'phone'=> '123456789',
-                'usr_id'=> 1
+                'usuario_id'=> 1
             ],
             [
                 'name' => 'Sisa',
                 'phone'=> '987654321',
-                'usr_id'=> 1
+                'usuario_id'=> 1
             ]
         ];
 

@@ -25,8 +25,8 @@ class CreateContactListTable extends Migration
             $table->string('name');
             $table->string('phone');
             $table->timestamps();
-            $table->unsignedInteger('usr_id');
-            $table->foreign('usr_id')
+            $table->unsignedInteger('usuario_id');
+            $table->foreign('usuario_id')
                 ->references('id')
                 ->on('usuario')
                 ->onDelete('cascade'); //if we  delete an specific user, deletes the contact-list
@@ -43,6 +43,7 @@ class CreateContactListTable extends Migration
     public function down()
     {
         Schema::dropIfExists('contact-list');
+        Schema::dropIfExists('usuario');
     }
 }
 

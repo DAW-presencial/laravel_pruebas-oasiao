@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ContactListController;
+use App\Http\Controllers\UsuarioController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,8 +15,17 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-//index
+
+
+
+
+//ContactListController
 Route::resource('/contacts', ContactListController::class);
+
+
+//UsuarioController
+Route::resource('/usuarios', UsuarioController::class);
+
 
 //create
 //Route::post('create',[ContactListController::class,'create']);

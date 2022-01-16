@@ -12,6 +12,8 @@ class Usuario extends Model
     protected $table = 'usuario';
     protected $primaryKey = 'id';
 
+    protected $fillable = ['username']; //need it for the store()
+
     public function contactLists(){
         return $this->hasMany(ContactList::class); //A user ($this) has many contacts
     }
