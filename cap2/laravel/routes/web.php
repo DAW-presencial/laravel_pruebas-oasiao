@@ -1,8 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\contadorController;
-use App\Http\Controllers\agendaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,7 +13,13 @@ use App\Http\Controllers\agendaController;
 |
 */
 
-//[nombreClase :: class, 'funcion'] o __invoke sin corchetes
-Route::get('/{visitas?}', [contadorController::class,'contador']); //controller --> contador
+Route::get('/', function () {
+    return view('welcome');
+});
 
-//Route::get('/agenda',[agendaController::class,'agenda']);
+Route::get('/dashboard', function () {
+    return view('dashboard');
+
+})->middleware(['auth'])->name('dashboard');
+
+require __DIR__.'/auth.php';

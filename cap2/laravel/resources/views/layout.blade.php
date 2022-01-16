@@ -9,16 +9,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
     <title></title>
 </head>
 <body>
-<h1>Agenda</h1>
-<form>
-    <h5>Add your contact:</h5>
-    <input type="text" name="person[]" placeholder="Name"/> <!--required="required"-->
-    <input type="number" name="person[]" placeholder="Phone"/>
-    <input type="submit" name="submit" value="Submit"/>
-    <input type="submit" name="restart" value="Restart"/>
-</form>
-
-<h1>@yield('cookies')</h1>
+<h1>@yield('form')</h1>
 </body>
 </html>
 
