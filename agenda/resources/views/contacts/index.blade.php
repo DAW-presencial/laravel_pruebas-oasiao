@@ -46,7 +46,7 @@ foreach ($users as $user){
         @endforelse
     </div>
 
-    @can('create',$newContacts)
+    @:('create',$newContacts)
     <a href="../agenda/create">Add new contact</a>
     @endcan
 @endsection
