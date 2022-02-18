@@ -28,12 +28,12 @@ class ApiContactsController extends Controller
      */
     public function store(Request $request)
     {
-        Contacts::create([
+        $contact = Contacts::create([
             'name' => $request->name,
-            'surname' => $request->surname
+            'phone' => $request->phone
         ]);
 
-        //return redirect('/contacts');
+        return $contact;
     }
 
     /**
@@ -57,10 +57,12 @@ class ApiContactsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        Contacts::where('id',$id)->update([
+        $contact = Contacts::where('id',$id)->update([
             'name' => $request->name,
-            'surname' => $request->surname
+            'phone' => $request->phone
         ]);
+
+        return $contact;
     }
 
     /**
@@ -71,7 +73,7 @@ class ApiContactsController extends Controller
      */
     public function destroy($id)
     {
-        $contact = DB::table('contacts')->select('name', 'surname')->where('id', $id)->get();
+        $contact = DB::table('contacts')->select('name', 'phone')->where('id', $id)->get();
         Contacts::destroy($id);
         return $contact;
     }

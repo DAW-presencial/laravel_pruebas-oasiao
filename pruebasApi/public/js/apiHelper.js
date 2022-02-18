@@ -16,40 +16,43 @@ const apiCrud = {
         });
     },
     store_js: function () {
-        let storeButton = document.querySelector('.create');
+        if (location.pathname === `/contacts/create`){
+            let storeButton = document.querySelector('.create');
+            storeButton.addEventListener("click", function () {
+                const formId = document.getElementById('createForm');
+                const form = new FormData(formId);
+                let formObject = {};
 
-        storeButton.addEventListener("click", function () {
-            const formId = document.getElementById('createForm');
-            const form = new FormData(formId);
-            let formObject = {};
+                form.forEach((value, key) => {
+                    formObject[key] = value;
+                });
 
+                const createContact = async (formObject) => {
+                    const url = `http://127.0.0.1:8000/api/apirest`;
+                    const settings = {
+                        method: 'POST',
+                        body: JSON.stringify(formObject),
+                        headers: {
+                            'Content-Type': 'application/json'
+                        }
+                    };
 
-            form.forEach((value, key) => {
-                formObject[key] = value;
+                    let response = await fetch(url, settings);
+                    console.log(response.json());
+                    //return await response.json();
+                }
+
+                createContact(formObject).then(()=>{
+                    console.log("hey");
+                    window.location.replace('/contacts');
+                }).catch(function(error) {
+                    console.log('Request failed', error);
+                });;
             });
+        }
 
-            const createContact = async (formObject) => {
-                const url = "/api/apirest";
-                const settings = {
-                    method: 'POST',
-                    body: JSON.stringify(formObject),
-                    headers: {
-                        'Content-Type': 'application/json'
-                    }
-                };
-
-                let response = await fetch(url, settings);
-                return await response.json();
-            }
-
-            createContact(formObject).then(() => {
-                location.href = "/contacts";
-            });
-
-        });
 
     },
-
     showContact:function (id){
         const contacts = async (id) => {
             const url =`/api/apirest/${id}`;
@@ -63,7 +66,6 @@ const apiCrud = {
             console.log(data);
         });
     },
-
     show_js: function () {
         let showButtons = document.querySelectorAll('.show');
 
@@ -91,44 +93,47 @@ const apiCrud = {
                     location.href = `/api/apirest/${id}`;
                 });*/
     },
-
-
     update_js: function () {
-        let editButton = document.querySelector('#contact');
+        let editButton = document.querySelector('.update');
         //let id = document.querySelector('#id').value;
 
-        let id = editButton.getAttribute('contact');
-        //new object
-        console.log(id);
-        const formId = document.getElementById('editForm');
-        const form = new FormData(formId);
-        let formObject = {};
+        let id = editButton.getAttribute('name');
 
-        form.forEach((value, key) => {
-            formObject[key] = value;
-        });
 
-        const editContact = async (formObject) => {
-            const url = `../../api/apirest/${id}`
-            const requestOptions = {
-                method: 'PUT',
-                body: JSON.stringify(formObject),
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-            };
-            let response = await fetch(url, requestOptions);
-            return await response.json();
+        if (location.pathname === `/contacts/${id}/edit`){
+
+            editButton.addEventListener("click",function (){
+                //new object
+                const formId = document.getElementById('editForm');
+                const form = new FormData(formId);
+                let formObject = {};
+
+                form.forEach((value, key) => {
+                    formObject[key] = value;
+                });
+
+                const editContact = async (formObject) => {
+                    const url = `/api/apirest/${id}`
+                    const requestOptions = {
+                        method: 'PUT',
+                        body: JSON.stringify(formObject),
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                    };
+                    let response = await fetch(url, requestOptions);
+                    //return await response.json();
+                }
+
+                editContact(formObject).then(() => {
+                    window.location.replace('/contacts');
+                });
+            });
         }
 
-        editContact(formObject).then(() => {
-            location.href = "/contacts";
-        });
     },
-
     delete_js: function () {
         let deleteButtons = document.querySelectorAll('.destroy');
-
         deleteButtons.forEach(button => {
             button.addEventListener("click", function () {
                 let id = button.getAttribute('name');
@@ -151,12 +156,11 @@ const apiCrud = {
         this.show_js();
         this.index_js();
         this.store_js();
-        this.update_js();
+        this.update_js()
     }
 }
 
 apiCrud.renderButtons();
-
 
 /*function index_js() {
     const contacts = async () => {

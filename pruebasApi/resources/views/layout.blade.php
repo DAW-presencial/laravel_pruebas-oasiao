@@ -263,7 +263,7 @@
 
     </style>
 </head>
-<body onload="index_js()">
+<body>
 
 <ul class="navbar-nav d-flex flex-row gap-5">
     <li class="nav-item">

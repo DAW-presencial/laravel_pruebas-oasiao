@@ -15,12 +15,12 @@
                             </div>
 
                             <div class="col-md-12 mt-3">
-                                <input type="text" name="surname" placeholder="Surname" class="form-control" value="{{ old('size',$contact->surname ?? '') }}"/>
+                                <input type="text" name="phone" placeholder="Phone Number" class="form-control" value="{{ old('size',$contact->phone ?? '') }}"/>
                             </div>
                         </form>
 
                         <div class="form-button mt-3">
-                            <button onclick="update_js()" class="update btn btn-primary" name="{{ $contact->id }}">Update</button>
+                            <button class="update btn btn-primary" name="{{ $contact->id }}">Update</button>
                         </div>
                     </div>
                 </div>

@@ -11,7 +11,7 @@ class Contacts extends Model
 
     protected $table = 'contacts';
     protected $primaryKey = 'id';
-    protected $fillable = ['name','surname'];
-    protected $visible = ['id','name','surname'];
+    protected $fillable = ['name','phone'];
+    protected $visible = ['id','name','phone'];
 
 }

@@ -15,7 +15,7 @@
                             </div>
 
                             <div class="col-md-12 mt-3">
-                                <input type="text" name="surname" placeholder="Surname" class="form-control" value="{{ old('surname') }}"/>
+                                <input type="text" name="phone" placeholder="Phone Number" class="form-control" value="{{ old('phone') }}"/>
                             </div>
                         </form>
 

@@ -11,7 +11,7 @@
             <tr>
                 <td>Actions</td>
                 <td>Name</td>
-                <td>Surname</td>
+                <td>Phone number</td>
             </tr>
             </thead>
             <tbody>
@@ -40,7 +40,7 @@
                         </ul>
                     </td>
                     <td>{{ $contact->name }}</td>
-                    <td>{{ $contact->surname }}</td>
+                    <td>{{ $contact->phone }}</td>
                 </tr>
             @endforeach
             </tbody>

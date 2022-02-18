@@ -17,8 +17,6 @@ class ContactsController extends Controller
     {
         $api = new ApiContactsController();
         $contacts = $api->index();
-        //dd($contacts);
-        //$contacts = Contacts::all();
         return view('index',compact('contacts'));
     }
 
@@ -52,8 +50,7 @@ class ContactsController extends Controller
     public function show($id)
     {
         $api = new ApiContactsController();
-        //$contact = $api->show();
-        $contact = Contacts::find($id)->first();
+        $contact = $api->show($id);
         return view('show',compact('contact'));
     }
 
@@ -66,7 +63,7 @@ class ContactsController extends Controller
     public function edit($id)
     {
         $api = new ApiContactsController();
-        $contact = $api->show();
+        $contact = $api->show($id);
         return view('edit',compact('contact'));
     }
 
