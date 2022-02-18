@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ContactsController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,5 +15,10 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('layout');
 });
+
+//Route::get('/api',ApiContactsController::class);
+//Route::get('/myContacts',[ApiContactsController::class,'']);
+
+Route::resource('/contacts', ContactsController::class);
